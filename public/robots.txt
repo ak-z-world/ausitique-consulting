@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://yestoboss.com/
+
+# Sitemaps
+Sitemap: https://yestoboss.com/sitemap.xml

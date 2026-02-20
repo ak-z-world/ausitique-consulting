@@ -1,0 +1,12 @@
+import { serviceHeroTypes } from "@/types";
+
+export const soleProprietorshipHeroData: serviceHeroTypes = {
+  heading:"Sole Proprietorship Registration Online  ",
+  subHeading:
+    "Easily complete your Sole Proprietorship Registration Online with expert guidance and start your business quickly, legally, and hassle-free.",
+  question: "What Is a Sole Proprietorship?",
+  answer:
+    // "A sole proprietorship is a simple business structure where one individual owns and manages the entire business. You don’t need to register a separate company. Just obtain the necessary licenses and start operating using your own name or a business name of your choice.",
+    "A sole proprietorship is one of the oldest and simplest forms of business structure, widely chosen by individuals who wish to start their own venture with minimal effort and compliance requirements. In this model, the business is owned, managed, and controlled by a single person, making it easy to set up and operate. Unlike private limited companies or partnership firms, a sole proprietorship does not require formal incorporation under the Companies Act. Instead, the proprietor can begin operations after obtaining the necessary licenses, GST registration (if applicable), and local permits required for the nature of the business. The business can run in the individual’s own name or under a trade name that the owner chooses, which allows flexibility in creating a brand identity without much legal formality. This ease of formation and complete control makes it one of the most preferred choices for small shop owners, traders, freelancers, consultants, and service providers.One of the biggest advantages of a sole proprietorship is its simplicity. Since there is no separation between the business and the owner, decision-making is quick, operations are flexible, and profits directly belong to the proprietor. Compliance costs are low, and the taxation process is straightforward, as the income from the business is taxed under the individual’s personal income tax return. This structure also gives the proprietor complete independence to run the business as they see fit, without the need to consult partners, directors, or shareholders. However, this advantage comes with a significant limitation—the proprietor bears unlimited liability, which means they are personally responsible for all the debts and obligations of the business.",
+    image: "/images/x.svg",
+};
