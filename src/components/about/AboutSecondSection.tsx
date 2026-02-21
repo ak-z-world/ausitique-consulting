@@ -1,204 +1,302 @@
 "use client";
+
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { BlurText, CountUp } from "../animations";
+import { CountUp } from "../animations";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const AboutSecondSection = () => {
+
   const sectionRef = useRef(null);
-  const paragraphRef = useRef(null);
+  const badgeRef = useRef(null);
+  const aboutRef = useRef(null);
   const statsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const imageRef = useRef(null);
-  const badgeRef = useRef<HTMLDivElement | null>(null);
+  const missionRef = useRef(null);
+  const visionRef = useRef(null);
+  const globeRef = useRef(null);
+  const globalTextRef = useRef(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const baseTrigger = {
-        start: "top 80%",
-        toggleActions: "play none none none",
-        lazy: true,
-      };
 
-      // Badge animation
+    const ctx = gsap.context(() => {
+
       gsap.from(badgeRef.current, {
-        scrollTrigger: {
-          trigger: badgeRef.current,
-          ...baseTrigger,
-        },
-        autoAlpha: 0,
+        opacity: 0,
         y: -20,
         duration: 0.8,
-        ease: "power2.out",
-        immediateRender: false,
-        clearProps: "transform, opacity",
       });
 
-      // Paragraph animation
-      gsap.from(paragraphRef.current, {
-        scrollTrigger: {
-          trigger: paragraphRef.current,
-          ...baseTrigger,
-        },
-        autoAlpha: 0,
+      gsap.from(aboutRef.current, {
+        opacity: 0,
         y: 40,
         duration: 1,
-        ease: "power3.out",
-        immediateRender: false,
-        clearProps: "transform, opacity",
       });
 
-      // Stats animation
       gsap.from(statsRef.current, {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 85%",
-        },
-        autoAlpha: 0,
+        opacity: 0,
         y: 30,
-        duration: 0.8,
         stagger: 0.2,
-        ease: "power2.out",
-        immediateRender: false,
-        clearProps: "transform, opacity",
+        duration: 0.8,
       });
 
-      // Image animation
-      gsap.from(imageRef.current, {
-        scrollTrigger: {
-          trigger: imageRef.current,
-          ...baseTrigger,
-        },
-        autoAlpha: 0,
-        x: 100,
-        duration: 1.2,
-        ease: "power3.out",
-        immediateRender: false,
-        clearProps: "transform, opacity",
+      gsap.from(missionRef.current, {
+        opacity: 0,
+        x: -60,
+        duration: 1,
       });
+
+      gsap.from(visionRef.current, {
+        opacity: 0,
+        x: 60,
+        duration: 1,
+      });
+
+      gsap.from(globalTextRef.current, {
+        opacity: 0,
+        y: 40,
+        duration: 1,
+      });
+
+      // Globe rotation animation
+      gsap.to(globeRef.current, {
+        rotate: 360,
+        duration: 40,
+        repeat: -1,
+        ease: "linear",
+      });
+
+      // Globe floating effect
+      gsap.to(globeRef.current, {
+        y: -15,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "power1.inOut",
+      });
+
     }, sectionRef);
 
     return () => ctx.revert();
+
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-white general-sans overflow-hidden">
-      {/* About Section */}
-      <div className="flex flex-col lg:flex-row gap-10 lg:gap-32 p-5 sm:p-8 md:p-10 lg:p-14 xl:p-16">
+
+    <section
+      ref={sectionRef}
+      className="bg-white general-sans text-[#0B2A5B]"
+    >
+
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 py-12 md:py-16">
+
         {/* Badge */}
-        <div className="flex justify-center lg:justify-start" ref={badgeRef}>
-          <p className="px-8 h-fit font-medium text-sm text-center rounded-full py-2.5 border-[#EBEBEB] border-2">
-            About Us
-          </p>
+        <div ref={badgeRef} className="mb-6">
+
+          <span className="border border-blue-200 px-5 py-2 rounded-full text-sm font-medium">
+            About Auditique Consulting
+          </span>
+
         </div>
 
-        {/* Text Section */}
-        <div className="w-full flex-grow lg:w-2/3">
-          <BlurText
-            text="At Auditique Consulting, our mission is to help Indians master their money, simplify finances, and create smart solutions that save time and money for both businesses and individuals."
-            delay={50}
-            animateBy="words"
-            direction="top"
-            className="font-medium text-3xl md:text-4xl lg:text-5xl leading-tight"
-          />
 
-          <p
-            ref={paragraphRef}
-            className="font-normal text-xs mt-5"
+        {/* About */}
+        <div ref={aboutRef} className="max-w-4xl">
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight">
+
+            Delivering Financial Clarity with
+
+            <span className="text-yellow-500"> Global Expertise</span>
+
+          </h2>
+
+          <p className="mt-5 text-sm sm:text-base text-[#0B2A5B]/70 leading-relaxed">
+
+            Auditique Consulting is a progressive Chartered Accountancy and financial advisory firm co-founded by CA Varsha and CA Shwetha. We provide expert financial, taxation, compliance, and consulting services to businesses, professionals, and individuals.
+
+            Our commitment extends beyond compliance. We partner with our clients to deliver strategic financial insights that enable confident decision-making, sustainable growth, and long-term success in both domestic and international markets.
+
+          </p>
+
+        </div>
+
+
+        {/* Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mt-10">
+
+          {[
+            { value: 1200, label: "Clients Served Globally", suffix: "+" },
+            { value: 98, label: "Client Satisfaction Rate", suffix: "%" },
+            { value: 10, label: "Years of Expertise", suffix: "+" },
+          ].map((item, index) => (
+
+            <div
+              key={index}
+              ref={(el) => { statsRef.current[index] = el }}
+            >
+
+              <p className="text-3xl md:text-4xl font-semibold text-yellow-500">
+
+                <CountUp from={0} to={item.value} duration={2} />
+
+                {item.suffix}
+
+              </p>
+
+              <p className="text-sm text-[#0B2A5B]/70 mt-2">
+                {item.label}
+              </p>
+
+            </div>
+
+          ))}
+
+        </div>
+
+
+        {/* Mission Vision */}
+        <div className="grid md:grid-cols-2 gap-8 mt-14">
+
+          <div
+            ref={missionRef}
+            className="border border-blue-100 rounded-xl p-6 hover:shadow-md transition"
           >
-            With a team of experienced consultants, we empower entrepreneurs,
-            startups, and established businesses by streamlining essential
-            operations and eliminating complexity from business processes.
-          </p>
 
-          {/* CountUp Section */}
-          <div className="flex flex-col md:flex-row gap-10 md:gap-16 lg:gap-24 justify-between mt-10 lg:mt-14">
-            {[1200, 98, 24].map((value, i) => (
-              <div
-                key={i}
-                ref={(el) => { statsRef.current[i] = el }}
-              >
-                <p className="font-medium text-4xl md:text-5xl lg:text-6xl">
-                  <CountUp
-                    from={0}
-                    to={value}
-                    separator=","
-                    direction="up"
-                    duration={value === 24 ? 2 : value === 98 ? 0.5 : 0.2}
-                    className="count-up-text"
-                  />
-                  {value === 24 ? "/7" : value === 98 ? "%" : "+"}
-                </p>
-                <p className="font-normal text-sm mt-3">
-                  {i === 0 &&
-                    "Businesses are supported through reliable, end-to-end assistance."}
-                  {i === 1 &&
-                    "Success rate is built on trust and accuracy"}
-                  {i === 2 &&
-                    "Expert support is available anytime—no waiting required."}
-                </p>
+            <h3 className="text-xl font-semibold mb-3 text-yellow-500">
+              Our Mission
+            </h3>
+
+            <p className="text-sm text-[#0B2A5B]/70 leading-relaxed">
+
+              To provide comprehensive, client-focused Chartered Accountancy and financial consulting services through professional integrity, innovation, and deep domain expertise, empowering clients globally.
+
+            </p>
+
+          </div>
+
+
+          <div
+            ref={visionRef}
+            className="border border-blue-100 rounded-xl p-6 hover:shadow-md transition"
+          >
+
+            <h3 className="text-xl font-semibold mb-3 text-yellow-500">
+              Our Vision
+            </h3>
+
+            <p className="text-sm text-[#0B2A5B]/70 leading-relaxed">
+
+              To become a globally trusted financial advisory firm recognized for excellence, innovation, and delivering ethical, value-driven financial solutions worldwide.
+
+            </p>
+
+          </div>
+
+        </div>
+
+
+        {/* Global Reach Section */}
+        <div className="grid md:grid-cols-2 gap-5 items-center mt-15">
+
+          {/* Left */}
+          <div ref={globalTextRef}>
+
+            <h3 className="text-2xl md:text-3xl font-semibold">
+
+              Serving Clients Across the
+
+              <span className="text-yellow-500"> Globe</span>
+
+            </h3>
+
+            <p className="text-sm md:text-base text-[#0B2A5B]/70 mt-4 leading-relaxed">
+
+              Auditique Consulting proudly serves clients not only across India but also internationally. Our global approach enables us to support startups, entrepreneurs, and enterprises operating across borders.
+
+              We provide expert financial consulting, compliance management, and strategic advisory tailored to international business environments, ensuring seamless financial operations worldwide.
+
+            </p>
+
+
+            <div className="grid grid-cols-2 gap-6 mt-6">
+
+              <div>
+                <p className="text-2xl font-semibold text-yellow-500">15+</p>
+                <p className="text-sm text-[#0B2A5B]/70">Countries Served</p>
               </div>
-            ))}
+
+              <div>
+                <p className="text-2xl font-semibold text-yellow-500">Global</p>
+                <p className="text-sm text-[#0B2A5B]/70">Client Support</p>
+              </div>
+
+              <div>
+                <p className="text-2xl font-semibold text-yellow-500">Remote</p>
+                <p className="text-sm text-[#0B2A5B]/70">Service Capability</p>
+              </div>
+
+              <div>
+                <p className="text-2xl font-semibold text-yellow-500">24/7</p>
+                <p className="text-sm text-[#0B2A5B]/70">Consultation Support</p>
+              </div>
+
+            </div>
+
           </div>
+
+
+          {/* Right Globe */}
+          <div className="flex justify-center relative">
+
+            {/* Glow background */}
+            <div
+              className="
+      globe-glow
+      absolute
+      w-[260px] md:w-[340px] lg:w-[420px]
+      h-[260px] md:h-[340px] lg:h-[420px]
+      rounded-full blur-[90px]
+      pointer-events-none
+    "
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(255,193,7,0.5) 0%, rgba(11,42,91,0.5) 60%, transparent 80%)",
+              }}
+            />
+
+            {/* Globe */}
+            <div
+  ref={globeRef}
+  className="globe-float w-[250px] md:w-[320px] lg:w-[380px]"
+  style={{
+    filter:
+      "drop-shadow(0px 25px 50px rgba(11,42,91,0.25)) saturate(120%) contrast(105%)",
+  }}
+>
+
+              <Image
+                src="/images/globe.svg"
+                alt="Global Presence"
+                width={400}
+                height={400}
+                className="w-full h-auto globe-pulse"
+              />
+
+            </div>
+
+          </div>
+
         </div>
+
       </div>
 
-      {/* India Reach Section */}
-      <div className="bg-gradient-to-b gap-10 text-white from-[#212121] to-[#070707] h-auto lg:h-[90vh] flex flex-col lg:flex-row justify-between p-5 sm:p-8 md:p-10 lg:p-14 xl:p-16">
-        {/* Left */}
-        <div className="flex flex-col gap-6 lg:gap-8 w-full lg:w-1/2">
-          <p className="font-medium text-3xl md:text-4xl lg:text-5xl leading-tight">
-            We Serve Across India
-          </p>
-
-          <p className="font-normal text-sm leading-6">
-
-At Auditique Consulting, our core mission is to empower Indians—both individuals and businesses—to master their finances and simplify money management through smart, tailored solutions. Our dedicated team of experienced consultants streamlines essential operations, delivering reliable, seamless, end-to-end assistance. Whether you&apos;re a startup, entrepreneur, or established business in metro or emerging cities, our nationwide presence ensures fast, precise, and region-specific service that adapts to local needs. With a commitment to trust, accuracy, and round-the-clock expert support, we&apos;re proud to serve across more than 30 major cities and 5 regional zones, consistently earning high satisfaction and a strong 4.8-star rating. From meticulous document collection and eligibility verification to accurate filing, regulatory liaison, and real-time application tracking, our systematic approach ensures your financial and regulatory processes are smooth, compliant, and stress-free—empowering your growth with clarity and confidence.
-          </p>
-
-          <div className="grid grid-cols-2 gap-6 md:gap-10 w-full sm:w-fit">
-            <div className="flex flex-col gap-1">
-              <p className="font-semibold text-3xl md:text-4xl lg:text-5xl">30+</p>
-              <p className="text-sm">Major Cities Covered</p>
-            </div>
-
-            <div className="flex flex-col gap-1">
-              <p className="font-semibold text-3xl md:text-4xl lg:text-5xl">5</p>
-              <p className="text-sm">Regional Service Zones</p>
-            </div>
-
-            <div className="flex flex-col gap-1">
-              <p className="font-semibold text-3xl md:text-4xl lg:text-5xl">100%</p>
-              <p className="text-sm">Commitment to Local Relevance</p>
-            </div>
-
-            <div className="flex flex-col gap-1">
-              <p className="font-semibold text-3xl md:text-4xl lg:text-5xl">4.8</p>
-              <p className="text-sm">Star Service Rating</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Right */}
-        <div
-          className="relative h-[300px] sm:h-[400px] md:h-full w-full lg:w-[50%] mt-10 lg:mt-0"
-          ref={imageRef}
-        >
-          <Image
-            alt="Map of India"
-            src="/images/india-map-gif.gif"
-            fill
-            className="object-contain"
-          />
-        </div>
-      </div>
-
-      {/* Footer Spacer */}
-      {/* <div className="h-40 md:h-60 lg:h-80 w-full bg-gray-300"></div> */}
     </section>
+
   );
+
 };
 
 export default AboutSecondSection;

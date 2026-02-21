@@ -236,66 +236,7 @@ const ContactFollowUs = () => {
 
   return (
     <section>
-      <div className="bg-black general-sans py-8 sm:py-9 md:py-12 lg:py-14 xl:py-16 text-white">
-        {/* Marquee Section */}
-        <Marquee autoFill={true} className="mt-7" direction="right">
-          <div className="flex gap-4 sm:gap-5 items-center px-4 sm:px-8">
-            <p className="text-white font-extralight text-[60px] sm:text-[100px] md:text-[130px] lg:text-[150px] whitespace-nowrap">
-              Follow Us
-            </p>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="./icons/yes-to-boss-circle-logo.svg"
-              alt="logo"
-              className="w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] md:w-[120px] md:h-[120px] lg:w-[150px] lg:h-[150px]"
-              style={{ animation: "spin 15s linear infinite" }}
-            />
-          </div>
-        </Marquee>
-
-        {/* Social Links Section */}
-        <div className="flex flex-col gap-4  mt-10">
-          {socials.map((item, index) => (
-            <div key={item.name}>
-              <Link href={item.link} target="_blank" className="cursor-pointer">
-                <div
-                  className={`flex justify-between items-center px-4 sm:px-8 md:px-16 py-6 sm:py-8 rounded-md overflow-hidden
-              transition-colors duration-500 ease-in-out ${
-                hovered === item.name ? "bg-white" : "bg-transparent"
-              }`}
-                  onMouseEnter={() => handleMouseEnter(item.name, index)}
-                  onMouseLeave={() => handleMouseLeave(index)}
-                >
-                  <div className="relative w-full overflow-hidden whitespace-nowrap">
-                    <div
-                      className={`inline-block will-change-transform font-medium text-xl sm:text-2xl md:text-3xl transition-all duration-300 ${
-                        hovered === item.name
-                          ? "text-black font-poppins"
-                          : "text-white"
-                      }`}
-                      ref={(el) => {
-                        textRefs.current[index] = el;
-                      }}
-                    >
-                      {hovered === item.name
-                        ? repeatedTextMap[item.name]
-                        : item.name}
-                    </div>
-                  </div>
-
-                  <GoArrowUpRight
-                    className={`text-3xl sm:text-4xl transition-colors duration-500 ease-in-out ${
-                      hovered === item.name ? "text-black" : "text-white"
-                    }`}
-                  />
-                </div>
-              </Link>
-
-              {index !== 2 && <hr className="border-[#2F2F2F]" />}
-            </div>
-          ))}
-        </div>
-      </div>
+      
     </section>
   );
 };

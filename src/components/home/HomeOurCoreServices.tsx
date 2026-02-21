@@ -1,184 +1,209 @@
-// /* eslint-disable @next/next/no-img-element */
 "use client";
 import gsap from "gsap";
 import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const services = [
-  {
-    id: "01",
-    title: "Sole Proprietorship",
-    image: "./images/p1.jpg",
-  },
-  {
-    id: "02",
-    title: "GST Registration",
-    // image: "./images/home-ourcoreservice-image2.svg",
-    image: "./images/p2.jpg",
-  },
-  {
-    id: "03",
-    title: "Income Tax Return (ITR) Filing",
-    // image: "./images/home-ourcoreservice-image4.svg",
-    image: "./images/p3.jpg",
-  },
-  {
-    id: "04",
-    title: "EPFO Registration",
-    // image: "./images/home-ourcoreservice-image5.svg",
-    image: "./images/p4.jpg",
-  },
-  {
-    id: "05",
-    title: "TDS Returns Filing",
-    image: "./images/home-ourcoreservice-image3.svg",
-  },
+  { id: "01", title: "Sole Proprietorship" },
+  { id: "02", title: "GST Registration" },
+  { id: "03", title: "Income Tax Return (ITR) Filing" },
+  { id: "04", title: "EPFO Registration" },
+  { id: "05", title: "TDS Returns Filing" },
 ];
 
 const HomeOurCoreServices = () => {
   const [hovered, setHovered] = useState<number | null>(null);
-  const imageRef = useRef<HTMLImageElement | null>(null);
-  const targetPosition = useRef({ x: 0, y: 0 });
-  const currentPosition = useRef({ x: 0, y: 0 });
-  const animationRef = useRef<number | null>(null);
-  const pulseRef = useRef(null);
-  const lastMove = useRef(0);
 
+  const orbRef = useRef<HTMLDivElement | null>(null);
+  const listRef = useRef<HTMLDivElement | null>(null);
+  const pulseRef = useRef<HTMLParagraphElement | null>(null);
+
+  const target = useRef({ x: 0, y: 0 });
+  const current = useRef({ x: 0, y: 0 });
+  const raf = useRef<number | null>(null);
+
+  /* Mouse follow orb */
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const now = Date.now();
-      if (now - lastMove.current > 10) {
-        // throttle to ~60fps
-        targetPosition.current = { x: e.clientX + 20, y: e.clientY - 20 };
-        lastMove.current = now;
-      }
+    const move = (e: MouseEvent) => {
+      target.current = {
+        x: e.clientX - 100,
+        y: e.clientY - 100,
+      };
     };
 
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+    window.addEventListener("mousemove", move);
 
-  useEffect(() => {
-    const lerp = (start: number, end: number, factor: number) =>
-      start + (end - start) * factor;
+    const lerp = (a: number, b: number, n: number) => a + (b - a) * n;
 
     const animate = () => {
-      currentPosition.current.x = lerp(
-        currentPosition.current.x,
-        targetPosition.current.x,
-        0.15
-      );
-      currentPosition.current.y = lerp(
-        currentPosition.current.y,
-        targetPosition.current.y,
-        0.15
-      );
+      current.current.x = lerp(current.current.x, target.current.x, 0.08);
+      current.current.y = lerp(current.current.y, target.current.y, 0.08);
 
-      if (imageRef.current) {
-        imageRef.current.style.transform = `translate3d(${currentPosition.current.x}px, ${currentPosition.current.y}px, 0)`;
+      if (orbRef.current) {
+        orbRef.current.style.transform = `translate3d(${current.current.x}px, ${current.current.y}px, 0)`;
       }
 
-      animationRef.current = requestAnimationFrame(animate);
+      raf.current = requestAnimationFrame(animate);
     };
 
-    animationRef.current = requestAnimationFrame(animate);
+    raf.current = requestAnimationFrame(animate);
+
     return () => {
-      if (animationRef.current !== null) {
-        cancelAnimationFrame(animationRef.current);
-      }
+      window.removeEventListener("mousemove", move);
+      if (raf.current) cancelAnimationFrame(raf.current);
     };
   }, []);
 
+  /* pulse animation */
   useEffect(() => {
-    if (pulseRef.current) {
-      gsap.to(pulseRef.current, {
-        scale: 1.1,
-        duration: 1,
-        repeat: -1,
-        yoyo: true,
-        ease: "power1.inOut",
-      });
-    }
+    if (!pulseRef.current) return;
+
+    gsap.to(pulseRef.current, {
+      scale: 1.08,
+      duration: 1.5,
+      repeat: -1,
+      yoyo: true,
+      ease: "power1.inOut",
+    });
   }, []);
 
+  /* stagger reveal animation */
   useLayoutEffect(() => {
-    if (hovered !== null && imageRef.current) {
-      gsap.fromTo(
-        imageRef.current,
-        {
-          scale: 0.2,
-          opacity: 0,
+    if (!listRef.current) return;
+
+    gsap.fromTo(
+      listRef.current.children,
+      {
+        opacity: 0,
+        y: 50,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.15,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: listRef.current,
+          start: "top 80%",
         },
-        {
-          scale: 1,
-          opacity: 1,
-          duration: 0.4,
-          ease: "power3.out",
-        }
-      );
-    }
-  }, [hovered]);
+      }
+    );
+  }, []);
 
   return (
-    <section
-      data-start="top center"
-      className="relative p-5 sm:p-8 md:p-10 lg:p-14 xl:p-16 bg-gradient-to-br from-white via-blue-50 to-yellow-50 overflow-hidden"
-    >
-      <div className="absolute inset-0 -z-10">
+    <section className="relative p-6 sm:p-10 md:p-14 bg-gradient-to-br from-white via-blue-50 to-yellow-50 overflow-hidden">
 
-  <div className="absolute top-0 right-0 w-[350px] h-[350px] bg-blue-100 blur-[100px] rounded-full opacity-60" />
+      {/* floating animated orb */}
+      <div
+        ref={orbRef}
+        className="pointer-events-none fixed top-0 left-0 w-[200px] h-[200px] rounded-full blur-3xl opacity-30 z-50"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(37,99,235,0.6), rgba(234,179,8,0.4))",
+        }}
+      />
 
-  <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-yellow-100 blur-[100px] rounded-full opacity-60" />
+      {/* background glow */}
+      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-200 opacity-30 blur-[120px] rounded-full animate-pulse" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-yellow-200 opacity-30 blur-[120px] rounded-full animate-pulse" />
 
-</div>
+      {/* heading */}
       <div className="flex justify-center">
         <p
           ref={pulseRef}
-          className="text-[#0B2A5B] border border-blue-200 bg-white shadow-sm font-semibold rounded-full px-4 py-1"
+          className="text-[#0B2A5B] border border-blue-200 bg-white shadow-md font-semibold rounded-full px-6 py-2"
         >
           Our Core Services
         </p>
       </div>
 
-      <div className="relative flex flex-col md:flex-row pb-10 justify-center mt-10 md:mt-16 gap-10 md:gap-20 items-start general-sans font-medium text-xl md:text-4xl">
-        {/* Services List */}
-        <div className="flex flex-col w-full text-center">
+      {/* services list */}
+      <div className="flex justify-center mt-14">
+        <div
+          ref={listRef}
+          className="flex flex-col items-center gap-10 w-full max-w-3xl"
+        >
           {services.map((service, index) => (
             <div
               key={index}
-              className="pt-10 md:pt-14"
+              className="group relative cursor-pointer"
               onMouseEnter={() => setHovered(index)}
               onMouseLeave={() => setHovered(null)}
-              onTouchStart={() => setHovered(index)}
-              onTouchEnd={() => setHovered(null)}
             >
-              <p className="text-[#0B2A5B] md:text-2xl lg:text-3xl font-semibold hover:text-[#FFC107] hover:scale-105 md:hover:scale-110 transition-all duration-300">
-                {index + 1}. {service.title}
+              {/* animated underline glow */}
+              <div
+                className="absolute -inset-4 rounded-xl opacity-0 group-hover:opacity-100 transition duration-500 blur-xl"
+                style={{
+                  background:
+                    "linear-gradient(90deg, rgba(37,99,235,0.4), rgba(234,179,8,0.4))",
+                }}
+              />
+
+              {/* text */}
+              <p
+                className="relative text-[#0B2A5B] text-2xl md:text-3xl font-semibold transition-all duration-500"
+                style={{
+                  transform:
+                    hovered === index ? "scale(1.08)" : "scale(1)",
+                  background:
+                    hovered === index
+                      ? "linear-gradient(90deg,#2563eb,#eab308)"
+                      : "none",
+                  WebkitBackgroundClip:
+                    hovered === index ? "text" : "initial",
+                  WebkitTextFillColor:
+                    hovered === index ? "transparent" : "#0B2A5B",
+                }}
+              >
+                {service.id}. {service.title}
               </p>
-              {index !== services.length - 1 && (
-                <hr className="border border-blue-100 w-full md:w-2/3 mx-auto mt-8 md:mt-14" />
-              )}
+
+              {/* animated underline */}
+              <div
+                className="h-[2px] mt-2 transition-all duration-500"
+                style={{
+                  width: hovered === index ? "100%" : "0%",
+                  background:
+                    "linear-gradient(90deg,#2563eb,#eab308)",
+                }}
+              />
             </div>
           ))}
         </div>
-
-        {/* Floating Image (hidden on small screens) */}
-        <div className="block pointer-events-none fixed top-0 left-0 z-50">
-          {hovered !== null && (
-            <img
-              key={hovered}
-              ref={imageRef}
-              src={services[hovered].image}
-              alt="hover"
-              className="w-32 sm:w-40 md:w-64 h-20 sm:h-28 md:h-40 object-cover rounded-xl shadow-lg border border-blue-100 bg-white will-change-transform"
-              style={{
-                transformOrigin: "top left",
-              }}
-            />
-          )}
-        </div>
       </div>
+
+      {/* floating particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(10)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-2 h-2 rounded-full opacity-30"
+            style={{
+              background:
+                i % 2 === 0 ? "#2563eb" : "#eab308",
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animation: `float ${5 + Math.random() * 5}s infinite ease-in-out alternate`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* local animation */}
+      <style jsx>{`
+        @keyframes float {
+          from {
+            transform: translateY(0px);
+          }
+          to {
+            transform: translateY(-20px);
+          }
+        }
+      `}</style>
+
     </section>
   );
 };

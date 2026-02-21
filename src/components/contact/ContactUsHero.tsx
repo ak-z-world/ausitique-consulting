@@ -130,7 +130,7 @@ const ContactUsHero = () => {
             >
               Connect With Our Support Team!
             </p>
-            <a href="https://wa.me/6379920255" target="_blank">
+            <a href="https://wa.me/6381002179" target="_blank">
               <div className="flex justify-center lg:justify-start">
                 <button
                   ref={buttonRef}

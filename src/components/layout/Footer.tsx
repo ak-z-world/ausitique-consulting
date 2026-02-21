@@ -1,301 +1,185 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 import Image from "next/image";
-import TextPressure from "../animations/TextPressure";
 import Link from "next/link";
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRouter } from "next/navigation";
-import { FaFacebook, FaLinkedin, FaPlay } from "react-icons/fa";
+import React from "react";
+import { FaLinkedin } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
-gsap.registerPlugin(ScrollTrigger);
 
 export const Footer = () => {
-  const router = useRouter();
-  const textRef = useRef<HTMLParagraphElement>(null);
-  const sunRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!sunRef.current || !textRef.current) return;
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    const sunAnim = gsap.fromTo(
-      sunRef.current,
-      {
-        y: 150,
-        scale: 0.8,
-        opacity: 0.5,
-      },
-      {
-        y: -40,
-        scale: 1.2,
-        opacity: 1,
-        ease: "power2.out",
-        force3D: true,
-        scrollTrigger: {
-          trigger: sunRef.current,
-          start: "top 95%",
-          end: "bottom center",
-          scrub: true,
-          invalidateOnRefresh: false,
-        },
-      }
-    );
-
-    const textAnim = gsap.fromTo(
-      textRef.current,
-      {
-        y: 80,
-        opacity: 0,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: sunRef.current,
-          start: "top 90%",
-          end: "bottom center",
-          scrub: true,
-          invalidateOnRefresh: false,
-        },
-      }
-    );
-
-    ScrollTrigger.refresh();
-
-    return () => {
-      sunAnim.kill();
-      textAnim.kill();
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
-  }, []);
-
   return (
-    <footer className="bg-white text-[#0B2A5B] general-sans">
-      <div className="p-5 md:p-2 lg:p-16">
+    <footer className="bg-[#0B2A5B] text-white general-sans">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-14 py-10">
 
-        {/* Footer Grid */}
-        <div className="flex flex-wrap  gap-10 mt-0">
+        {/* Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
           {/* Contact */}
-          <div className=" xl:w-1/4">
-            <div className="flex flex-col gap-5">
-              <div className="flex justify-between text-sm">
-                <p>Mobile</p>
-                <a href="tel:+91 63810 02179">
-                  <p>+91 63810 02179</p>
-                </a>
-              </div>
-              <hr className="border border-yellow w-full " />
-              <div className="flex justify-between text-sm">
-                <p>Email</p>
-                <a href="mailto:auditiqueconsulting@gmail.com">
-                  <p>auditiqueconsulting@gmail.com</p>
-                </a>
-              </div>
-              <hr className="border border-yellow w-full " />
+          <div className="space-y-4">
+            <h3 className="text-yellow-400 font-semibold text-lg">
+              Contact
+            </h3>
+
+            <div className="flex justify-between text-sm">
+              <span className="text-white/70">Mobile</span>
+              <a
+                href="tel:+916381002179"
+                className="hover:text-yellow-400 transition"
+              >
+                +91 63810 02179
+              </a>
             </div>
 
-            <p className="mt-8">Follow Us</p>
-            <div className="mt-2 flex gap-2">
-              <Link
-                target="_blank"
-                href="https://www.facebook.com/share/1EkhGhedjN/"
+            <div className="flex justify-between text-sm">
+              <span className="text-white/70">Email</span>
+              <a
+                href="mailto:auditiqueconsulting@gmail.com"
+                className="hover:text-yellow-400 transition break-all"
               >
-                <Image
-                  alt="facebook-icon"
-                  src={"/icons/facebook-icon.svg"}
-                  width={20}
-                  height={20}
-                />
-              </Link>
-              {/* <Image
-                alt="x-icon"
-                src={"/icons/x-icon.svg"}
-                width={20}
-                height={20}
-              /> */}
+                auditiqueconsulting@gmail.com
+              </a>
+            </div>
 
-              <Link
-                target="_blank"
-                href="https://www.instagram.com/auditiqueconsulting"
-              >
-                <Image
-                  alt="threads-icon"
-                  src={"/icons/instagram-icon.svg"}
-                  width={20}
-                  height={20}
-                />
-              </Link>
+            {/* Social */}
+            <div className="pt-2">
+              <p className="text-yellow-400 text-sm mb-2">Follow Us</p>
 
-              <Link
-                target="_blank"
-                href="https://www.linkedin.com/company/auditiqueconsulting/"
-              >
-                <Image
-                  alt="threads-icon"
-                  src={"/icons/linkedin-icon.svg"}
-                  width={20}
-                  height={20}
-                />
-              </Link>
+              <div className="flex gap-3">
+                <Link
+                  target="_blank"
+                  href="https://www.facebook.com/share/1EkhGhedjN/"
+                >
+                  <Image
+                    alt="facebook"
+                    src="/icons/facebook-icon.svg"
+                    width={20}
+                    height={20}
+                    className="hover:scale-110 transition"
+                  />
+                </Link>
+
+                <Link
+                  target="_blank"
+                  href="https://www.instagram.com/auditiqueconsulting"
+                >
+                  <Image
+                    alt="instagram"
+                    src="/icons/instagram-icon.svg"
+                    width={20}
+                    height={20}
+                    className="hover:scale-110 transition"
+                  />
+                </Link>
+
+                <Link
+                  target="_blank"
+                  href="https://www.linkedin.com/company/auditiqueconsulting/"
+                >
+                  <Image
+                    alt="linkedin"
+                    src="/icons/linkedin-icon.svg"
+                    width={20}
+                    height={20}
+                    className="hover:scale-110 transition"
+                  />
+                </Link>
+              </div>
             </div>
           </div>
 
-          {/* address */}
-          <div className="md:w-1/3 xl:w-1/4">
-            <p className="font-semibold text-xl">Office Address</p>
-            <div className="mt-6 flex flex-col gap-5">
-              <div className="flex gap-2">
-                {/* <IoLocationOutline className="text-2xl " /> */}
-                <img
-                  src="/icons/footer-location-icon.svg"
-                  alt=""
-                  className="h-fit"
-                />
-                <p className="text-sm">
-                  No 33/14, Ground floor, West Mambalam, Chennai, Tamil Nadu 600029
-                </p>
-              </div>
-              <div className="flex gap-2 items-center">
-                <img
-                  src="/icons/footer-mail-icon.svg"
-                  alt=""
-                  className="h-fit"
-                />
-                {/* <LuMailOpen className="text-md" /> */}
-                {/* <p className="text-sm">auditiqueconsulting@gmail.com</p> */}
-                <a href="mailto:auditiqueconsulting@gmail.com">
-                  <p className="text-sm">auditiqueconsulting@gmail.com</p>
-                </a>
-              </div>
-              <div className="flex gap-2 items-center">
-                <img
-                  src="/icons/footer-phone-icon.svg"
-                  alt=""
-                  className="h-fit"
-                />
-                {/* <FiPhoneCall className="text-md" /> */}
-                <a href="tel:+91 63810 02179">
-                  <p className="text-sm">Phone : +91 63810 02179</p>
-                </a>
-              </div>
+          {/* Address */}
+          <div className="space-y-4">
+            <h3 className="text-yellow-400 font-semibold text-lg">
+              Office Address
+            </h3>
 
-              <a
-                target="_blank"
-                href="https://maps.app.goo.g6GHZW7G1gj7"
-                className="underline text-sm underline-offset-4"
-              >
-                View Map
-              </a>
-            </div>
+            <p className="text-sm text-white/80 leading-relaxed">
+              No 33/14, Ground floor, West Mambalam, Chennai,
+              Tamil Nadu 600029
+            </p>
+
+            <a
+              href="https://maps.app.goo.GHZW7G1gj7"
+              target="_blank"
+              className="text-sm text-yellow-400 underline hover:text-yellow-300"
+            >
+              View Map
+            </a>
           </div>
 
           {/* Links */}
-          <div>
-            <p className="font-semibold text-xl text-[#0B2A5B]">
-              Link
-            </p>
+          <div className="space-y-4">
+            <h3 className="text-yellow-400 font-semibold text-lg">
+              Quick Links
+            </h3>
 
-            <div className="mt-6 flex flex-col gap-3">
+            <div className="flex flex-col gap-2 text-sm">
 
-              <Link
-                href="/"
-                className="text-sm text-[#0B2A5B] hover:text-[#FFC107] transition-all duration-300"
-              >
+              <Link href="/" className="hover:text-yellow-400 transition">
                 Home
               </Link>
 
-              <Link
-                href="/about-us"
-                className="text-sm text-[#0B2A5B] hover:text-[#FFC107] transition-all duration-300"
-              >
+              <Link href="/about-us" className="hover:text-yellow-400 transition">
                 About Us
               </Link>
 
-              <Link
-                href="/contact-us"
-                className="text-sm text-[#0B2A5B] hover:text-[#FFC107] transition-all duration-300"
-              >
-                Contact
+              <Link href="/services" className="hover:text-yellow-400 transition">
+                Services
               </Link>
 
-              <Link
-                href="/services"
-                className="text-sm text-[#0B2A5B] hover:text-[#FFC107] transition-all duration-300"
-              >
-                Services
+              <Link href="/contact-us" className="hover:text-yellow-400 transition">
+                Contact
               </Link>
 
             </div>
           </div>
 
-          {/* Ak's tech */}
-          <div className="xl:w-1/4 flex flex-col lg:items-center  flex-wrap gap-y-3">
-            <p className="text-black  font-medium">Crafting Excellence With</p>
-
-            <a href="https://aktechnologies.com/" target="_blank">
-              {/* <Image
-                src="/icons/.svg"
-                height={16}
-                width={26}
-                alt="a"
-                className="w-20 h-16 md:w-28 md:h-20 hover:saturate-150 transition-all duration-500"
-              /> */}
-            </a>
+          {/* AK Technologies */}
+          <div className="space-y-4">
+            <h3 className="text-yellow-400 font-semibold text-lg">
+              Technology Partner
+            </h3>
 
             <a
               href="https://aktechnologies.com/"
               target="_blank"
-              className="text-black hover:text-black/70 transition-all duration-500 font-medium"
+              className="text-white hover:text-yellow-400 transition"
             >
               AK Technologies
             </a>
 
-            <div className="flex flex-wrap gap-x-3">
-              <a
-                href="https://www.instagram.com/ak_z_world/"
-                target="_blank"
-              >
-                <RiInstagramFill className="text-white  rounded-full bg-blue-600 p-1 text-2xl md:text-3xl cursor-pointer" />
+            <div className="flex gap-3 pt-2">
+
+              <a href="https://www.instagram.com/ak_z_world/" target="_blank">
+                <RiInstagramFill className="bg-yellow-400 text-[#0B2A5B] rounded-full p-1 text-2xl hover:scale-110 transition" />
               </a>
 
-              <a
-                href="https://www.linkedin.com/arun kumar"
-                target="_blank"
-              >
-                <FaLinkedin className="text-white rounded-full bg-blue-600 p-1 text-2xl md:text-3xl cursor-pointer " />
+              <a href="https://www.linkedin.com/" target="_blank">
+                <FaLinkedin className="bg-yellow-400 text-[#0B2A5B] rounded-full p-1 text-2xl hover:scale-110 transition" />
               </a>
+
             </div>
+
           </div>
+
         </div>
 
-        <hr className="border border-white/10 w-full mt-7" />
+        {/* Divider */}
+        <div className="border-t border-white/20 mt-8 pt-5 flex flex-col md:flex-row justify-between items-center gap-3 text-sm">
 
-        {/* Bottom Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center mt-5 gap-5 text-center md:text-left">
-          <div>
-            <p className="text-sm">
-              &copy; 2022-2025 | Alrights Reserved by Auditique Consulting
-            </p>
-          </div>
+          <p className="text-white/70 text-center md:text-left">
+            © 2022–2025 Auditique Consulting. All rights reserved.
+          </p>
 
-          <a href="https://aktechnologies.com/" target="_blank">
-            <div className="flex gap-2 ">
-              <p className="hover:text-yellow/80 text-sm text-black transition-all duration-500">
-                Powered by AK Technologies
-              </p>
-              {/* <Image
-                src="/icons/.svg"
-                height={16}
-                width={26}
-                alt="AK Z World"
-              /> */}
-            </div>
+          <a
+            href="https://aktechnologies.com/"
+            target="_blank"
+            className="text-yellow-400 hover:text-yellow-300 transition"
+          >
+            Powered by AK Technologies
           </a>
+
         </div>
+
       </div>
     </footer>
   );

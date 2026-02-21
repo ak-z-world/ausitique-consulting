@@ -160,95 +160,77 @@ const HomeWhatMakesUsDifferent = () => {
       className="general-sans xxx bg-white text-black"
     >
       {/* Heading Section */}
-      <div className="flex flex-col p-5 sm:p-8 md:p-10 lg:p-14 xl:p-16 gap-2 sm:gap-5 items-center justify-center text-center">
-        <div
-          // ref={headingTextRef}
-          className="flex flex-wrap  items-center justify-center gap-2 sm:gap-5 font-medium text-2xl sm:text-4xl md:text-5xl"
-        >
-          <p>What</p>
-          <video
-            src="/videos/home-what-makeus-different-video1.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            className="w-20 sm:w-28 h-9 md:h-13 rounded-3xl hover:w-50 transition-all duration-2000 ease-in object-cover"
-          />
-          <p>Makes Us Different</p>
-          <div
-            className="w-10 sm:w-14 h-auto overflow-hidden will-change-transform"
-            ref={imageRef}
-          >
-            <Image
-              alt="tax-business-consulting"
-              src="/icons/home-cirlce-icon.svg"
-              width={50}
-              height={40}
-              className="w-full h-auto object-cover"
-            />
-          </div>
+      <div className="relative flex flex-col py-6 sm:py-8 md:py-10 gap-4 items-center justify-center text-center overflow-hidden">
+
+        {/* Blue-Yellow glow orb */}
+        <div className="absolute w-[300px] h-[300px] bg-gradient-to-r from-blue-500/20 to-yellow-400/20 blur-[120px] rounded-full animate-float pointer-events-none"></div>
+
+        {/* Heading */}
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-5 font-semibold text-3xl sm:text-5xl md:text-6xl leading-tight">
+
+          {/* WHAT with gradient effect */}
+          <span className="relative gradient-text animate-fadeUp delay-100">
+            What
+            <span className="animated-underline"></span>
+          </span>
+
+          {/* Makes Us Different */}
+          <span className="relative gradient-text animate-fadeUp delay-300">
+            Makes Us Different
+            <span className="animated-underline"></span>
+          </span>
+
         </div>
 
         {/* Subheading */}
-        <div
-          ref={subHeadingTextRef}
-          className="flex flex-wrap justify-center items-center gap-4 sm:gap-5 font-medium text-2xl sm:text-4xl md:text-5xl"
-        >
-          <p>For</p>
-          <div ref={pulseRef} className="w-10 sm:w-14 h-auto">
-            <Image
-              alt="tax-business-consulting"
-              src="/icons/home-play-icon.svg"
-              width={50}
-              height={40}
-            />
-          </div>
-          <p>Our Clients</p>
-          <div className="w-14 sm:w-20 h-auto hidden sm:inline-block">
-            <Image
-              src="/icons/home-our-clients-icon.svg"
-              alt="Client Icon"
-              width={70}
-              height={80}
-              className="w-full h-auto object-cover"
-            />
-          </div>
+        <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-5 font-medium text-2xl sm:text-4xl md:text-5xl leading-tight">
+
+          <span className="text-blue-500 animate-fadeUp delay-500 glow-blue">
+            For
+          </span>
+
+          <span className="text-yellow-500 animate-fadeUp delay-700 glow-yellow">
+            Our Clients
+          </span>
+
         </div>
+
       </div>
 
       {/* Cards Section */}
       <div
-        ref={cardsWrapperRef}
-        className="max-md:hidden p-5 sm:p-8 md:p-10 lg:p-14 xl:p-16 grid grid-cols-2 lg:grid-cols-4 pt-12 lg:pt-16 gap-5 sm:gap-7 md:gap-12"
-      >
-        {data.map((item, index) => (
-          <div
-            key={item.id}
-            className={`service-card bg-[#E8E8E8] lg:saturate-0 relative rounded-2xl md:rounded-3xl overflow-hidden cursor-pointer h-[300px] md:h-[26rem] transition-all duration-700 ${
-              index === 0 ? "hover:saturate-500" : "hover:saturate-100"
-            } will-change-transform`}
-          >
-            <img
-              src={item.image}
-              alt={item.title}
-              className="absolute z-10 object-cover w-full h-full"
-            />
-            <div className="absolute w-full h-full bg-gradient-to-b from-transparent from-70% to-black z-20"></div>
-            <div className="absolute z-30 bottom-0 p-4 sm:p-6">
-              <p className="text-white text-sm sm:text-xs font-medium">
-                {item.id}
-              </p>
-              <p className="text-white text-xl sm:text-2xl font-medium md:font-semibold leading-snug">
-                {item.title.split('-')[0]}
-              </p>
-              <p className="text-white text-xl sm:text-2xl font-medium md:font-semibold leading-snug">
-                {item.title.split('-')[1]}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
+  ref={cardsWrapperRef}
+  className="relative py-16 flex flex-wrap justify-center gap-16 overflow-hidden bg-gradient-to-r from-blue-50 via-white to-yellow-50"
+>
+
+  {/* background blobs */}
+  <div className="blob-bg blob-blue"></div>
+  <div className="blob-bg blob-yellow"></div>
+
+  {data.map((item, index) => (
+    <div
+      key={item.id}
+      className="feature-item flex flex-col items-center text-center"
+      style={{ animationDelay: `${index * 0.2}s` }}
+    >
+
+      {/* animated line */}
+      <div className="feature-line"></div>
+
+      {/* number */}
+      <span className="feature-number">
+        {item.id}
+      </span>
+
+      {/* title */}
+      <span className="feature-text">
+        {item.title.replace("-", " ")}
+      </span>
+
+    </div>
+  ))}
+
+</div>
 
       {/* Mobile Swiper */}
       <div className="md:hidden py-5 h-80 overflow-hidden relative w-full flex">

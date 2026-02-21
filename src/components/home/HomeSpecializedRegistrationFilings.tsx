@@ -137,13 +137,12 @@ const HomeSpecializedRegistrationFilings = () => {
   const renderCard = (item: MarqueeItem, i: number, marquee: string) => (
     <div
       key={`${marquee}-${i}`}
-      className={`group h-64 sm:h-72 ${
-        i % 2 === 0
+      className={`group h-64 sm:h-72 ${i % 2 === 0
           ? "w-72 sm:w-80"
           : marquee === "marquee-1"
-          ? "w-[320px] sm:w-[450px]"
-          : "w-[300px] sm:w-[550px]"
-      } flex-shrink-0 rounded-3xl bg-black relative`}
+            ? "w-[320px] sm:w-[450px]"
+            : "w-[300px] sm:w-[550px]"
+        } flex-shrink-0 rounded-3xl bg-black relative`}
     >
       <div className="absolute w-full h-full group-hover:bg-black/40 transition-all duration-1000 bg-black/75 z-20 rounded-3xl"></div>
       <div className="absolute w-full h-full bg-gradient-to-b from-transparent to-black from-70% transition-all duration-1000 opacity-0 group-hover:opacity-100 z-30 rounded-3xl"></div>
@@ -177,13 +176,9 @@ const HomeSpecializedRegistrationFilings = () => {
           </p>
         </div>
 
-        <div ref={circularRef} className="max-md:hidden block">
-          <CircularText
-            text="YES*TO*BOSS*"
-            onHover="speedUp"
-            spinDuration={20}
-            className="custom-class"
-          />
+        <div className="luxury-badge max-md:hidden text-xl">
+          <span className="luxury-dot"></span>
+          Auditique Consulting
         </div>
       </div>
 
@@ -200,37 +195,6 @@ const HomeSpecializedRegistrationFilings = () => {
           {marqueeData2.map((item, i) => renderCard(item, i, "marquee-2"))}
         </div>
       </Marquee>
-
-      {/* === Footer Tagline Section === */}
-      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-6 p-5 sm:p-8 md:p-10 lg:p-14 xl:p-16 general-sans text-center sm:text-left">
-        <video
-          src="/videos/home-specialized-registration-video1.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          className="h-10 w-20 sm:h-12 sm:w-24 rounded-3xl object-cover hover:w-36 transition-all duration-700 hidden sm:block"
-        />
-        <p className="text-xl sm:text-4xl md:text-5xl font-bold">
-          Financial Consultancy &
-        </p>
-        <p className="text-[#a8a6c9] text-xl sm:text-4xl md:text-5xl font-bold">
-          Analysis,
-        </p>
-        <video
-          src="/videos/home-specialized-registration-video2.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          className="h-10 w-20 sm:h-12 sm:w-24 rounded-3xl object-cover hover:w-36 transition-all duration-700"
-        />
-        <p className="text-[#a8a6c9] text-xl sm:text-4xl md:text-5xl font-bold">
-          Tax Pro
-        </p>
-      </div>
     </section>
   );
 };
