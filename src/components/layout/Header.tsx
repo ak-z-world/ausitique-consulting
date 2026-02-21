@@ -142,7 +142,7 @@ export const Header: React.FC<HeaderProps> = ({
                     ? "/icons/auditique-consulting.png"
                     : "/icons/auditique-consulting.png"
                 }
-                alt="Yes To Boss Logo"
+                alt="Auditique Consulting"
                 fill
                 className="object-contain"
                 priority
@@ -244,12 +244,8 @@ export const Header: React.FC<HeaderProps> = ({
           openMenuButtonColor="#fff"
           changeMenuColorOnOpen={true}
           colors={["black", "1d1d1d"]}
-          // colors={['#B19EEF', '#5227FF']}
-          // logoUrl={textColor === "black"
-          //   ? "/icons/yes-to-boss-white-logo.svg"
-          //   : "/icons/yes-to-boss-logo.svg"}
-
-          logoUrl="/icons/yes-to-boss-white-logo.svg"
+         
+          logoUrl="/icons/auditique-white-logo.svg"
           accentColor="#ff6b6b"
         />
         {/* </div> */}

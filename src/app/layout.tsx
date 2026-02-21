@@ -4,49 +4,83 @@ import { Footer } from "@/components/layout";
 import GoToTop from "@/components/common/GoToTop";
 
 export const metadata = {
-  metadataBase: new URL("https://yestoboss.com"),
-  title: "income tax consultancy services | YesToBoss",
+  metadataBase: new URL("https://auditiqueconsulting.com"),
+
+  title: {
+    default: "Auditique Consulting | Chartered Accountant & Financial Advisory Firm",
+    template: "%s | Auditique Consulting",
+  },
+
   description:
-    "YesToBoss offers expert Income Tax Consultancy Services for individuals & businesses. File ITR online, save tax legally, with professional financial support.",
+    "Auditique Consulting is a trusted Chartered Accountant firm providing expert tax consultancy, accounting, compliance, and financial advisory services for businesses, professionals, and individuals globally.",
+
   keywords: [
+    "Auditique Consulting",
+    "Chartered Accountant firm",
     "Tax consultancy services",
-    "Best chartered accountant firms in India",
-    "Tax advisor in India",
-    "Tax auditor in India",
-    "Financial consultancy services in India",
+    "Financial advisory services",
+    "GST filing services",
+    "Income tax filing",
+    "Business compliance services",
+    "Accounting and bookkeeping",
+    "Startup financial advisory",
+    "CA firm in Chennai",
+    "Global tax consulting",
   ],
+
+  authors: [
+    {
+      name: "Auditique Consulting",
+      url: "https://auditiqueconsulting.com",
+    },
+  ],
+
+  creator: "Auditique Consulting",
+  publisher: "Auditique Consulting",
+
   openGraph: {
-    title:
-      "Tax consultancy services | Best chartered accountant firms in India",
+    title: "Auditique Consulting | Trusted Chartered Accountant & Financial Advisory Firm",
+
     description:
-      "YesToBoss provides expert tax consultancy services with the best chartered accountant firms in India, offering GST, ITR filing, startup registration & more.",
-    url: "https://yestoboss.com/",
-    siteName: "YesToBoss",
+      "Professional Chartered Accountant services including tax filing, GST compliance, accounting, and financial advisory tailored for businesses and individuals globally.",
+
+    url: "https://auditiqueconsulting.com",
+
+    siteName: "Auditique Consulting",
+
     images: [
       {
-        url: "https://yestoboss.com/og-image2.png",
+        url: "https://auditiqueconsulting.com/og-image.png",
         width: 1200,
         height: 630,
-        alt: "YesToBoss - Tax Consultancy Services",
+        alt: "Auditique Consulting - Chartered Accountant Firm",
       },
     ],
+
     locale: "en_IN",
     type: "website",
   },
+
   twitter: {
     card: "summary_large_image",
+
     title:
-      "Tax consultancy services | Best chartered accountant firms in India",
+      "Auditique Consulting | Chartered Accountant & Financial Advisory Firm",
+
     description:
-      "YesToBoss provides expert tax consultancy services with the best chartered accountant firms in India, offering GST, ITR filing, startup registration & more.",
-    images: ["https://yestoboss.com/og-image2.png"],
+      "Expert tax consultancy, GST filing, accounting, and financial advisory services from trusted Chartered Accountants.",
+
+    images: ["https://auditiqueconsulting.com/og-image.png"],
   },
+
   icons: {
     icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
   },
+
+  category: "Finance",
 };
-
-
 
 
 export default function RootLayout({

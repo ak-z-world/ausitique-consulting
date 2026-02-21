@@ -16,18 +16,10 @@ const ITR1FinanceServices = () => {
 
       <div className="flex  justify-between gap-8 mt-2">
         <div className="font-semibold text-2xl md:text-3xl lg:text-4xl xl:text-5xl lg:w-[70%]">
-          {/* <p>Financial Management,</p>
-          <p>
-            <span className="text-[#616161]">Analysis</span> , And Operations
-          </p> */}
-          <p>Why Choose Yes to Boss for ITR-1 Filing?</p>
+
+          <p>Why Choose Auditique Consulting for ITR-1 Filing?</p>
         </div>
 
-        {/* <p className="text-xs ">
-          It is a long established fact that a reader will be distracted by the
-          readable content of a page when looking at its layout. It is a long
-          established fact that a reader will be distracted
-        </p> */}
       </div>
 
       <div className="flex flex-col md:flex-row flex-wrap justify-between mt-16 gap-5 md:gap-8">
